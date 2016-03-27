@@ -35,6 +35,7 @@
     $scope.createNewMovie = createNewMovie;
     $scope.editMovie = editMovie;
     $scope.updateMovie = updateMovie;
+    $scope.deleteMovie = deleteMovie;
 
     init();
 
@@ -84,6 +85,18 @@
       });
     }
 
+
+    function deleteMovie(movie) {
+      $http({
+        method: 'DELETE',
+        url: '/api/movies/' + movie.id
+      }).success(function (data) {
+        $scope.movies.splice( $scope.movies.indexOf(movie), 1 )
+      })
+      .error(function (response, status) {
+        $log.warn(response);
+      });
+    }
 
   };
 

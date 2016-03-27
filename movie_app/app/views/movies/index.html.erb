@@ -24,7 +24,8 @@
           <td>{{movie.url}}</td>
           <td>{{movie.rating}}</td>
           <td>
-            <button type="button" class="btn btn-default" ng-click="editMovie(movie)">Edit</button>
+            <button type="button" class="btn btn-primary" ng-click="editMovie(movie)">Edit</button>
+            <button type="button" class="btn btn-danger" ng-click="deleteMovie(movie)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -66,7 +67,7 @@
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
             <button ng-show='isNew' type="submit" class="btn btn-primary" ng-click="createNewMovie()">Create</button>
-            <button ng-show='isEdit' type="submit" class="btn btn-primary" ng-click="updateMovie()">Edit</button>
+            <button ng-show='isEdit' type="submit" class="btn btn-primary" ng-click="updateMovie()">Update</button>
             <button type="button" class="btn btn-default" ng-click="isForm=false">Cancel</button>
           </div>
         </div>
