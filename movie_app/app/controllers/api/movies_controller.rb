@@ -1,5 +1,5 @@
 class Api::MoviesController < ApplicationController
-  before_action :set_movie, only: [:update, :destroy]
+  before_action :set_movie, only: [:update, :destroy, :show]
 
   # GET /movies
   # GET /movies.json
@@ -7,6 +7,10 @@ class Api::MoviesController < ApplicationController
     @movies = Movie.all
 
     render json: @movies
+  end
+
+  def show
+    render json: @movie
   end
 
   # POST /movies

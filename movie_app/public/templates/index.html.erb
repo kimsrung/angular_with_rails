@@ -1,0 +1,27 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Average Rating</th>
+      <th>Release Year</th>
+      <th>URL</th>
+      <th>Rating</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="movie in movies">
+      <td>{{movie.id}}</td>
+      <td>{{movie.name}}</td>
+      <td>{{movie.average_rating}}</td>
+      <td>{{movie.release_year}}</td>
+      <td>{{movie.url}}</td>
+      <td>{{movie.rating}}</td>
+      <td>
+        <a href="#/edit/{{movie.id}}">Edit</a> |
+        <a ng-click="deleteMovie(movie.id, $index)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
