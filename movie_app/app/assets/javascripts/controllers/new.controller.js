@@ -17,7 +17,7 @@
         url: '/api/movies',
         data: $scope.movie
       }).success(function (data) {
-        $location.path('movies');
+        $location.path('/');
       })
       .error(function (response, status) {
         $log.warn(response);

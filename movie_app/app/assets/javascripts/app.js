@@ -8,15 +8,15 @@
       $locationProvider.html5Mode(true);
 
       $routeProvider
-      .when('/movies', {
+      .when('/', {
         templateUrl: '/templates/index.html.erb',
         controller: 'IndexController'
       })
-      .when('/movies/new', {
+      .when('/new', {
         templateUrl: '/templates/new.html.erb',
         controller: 'NewController'
       })
-      .when('/movies/edit/:id', {
+      .when('/edit/:id', {
         templateUrl: '/templates/edit.html.erb',
         controller: 'EditController'
       })
