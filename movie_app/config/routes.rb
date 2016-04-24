@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/movies(*all)',  to: 'movies#index', as: :movies
   resources :movies, only: [:index]
   namespace :api do
     resources :movies

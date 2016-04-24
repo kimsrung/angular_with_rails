@@ -4,35 +4,30 @@
     .module('myApp')
     .controller('EditController', EditController);
 
-  EditController.$inject = ['$scope', '$http', '$log', '$location', '$routeParams'];
+  EditController.$inject = ['$scope', '$http', '$log', '$location', '$routeParams', 'movieFactory'];
 
-  function EditController($scope, $http, $log, $location, $routeParams) {
+  function EditController($scope, $http, $log, $location, $routeParams, movieFactory) {
     $scope.id = $routeParams.id;
     $scope.updateMovie = updateMovie;
 
     init();
 
     function init() {
-      $http.get('/api/movies/'+ $scope.id)
-        .success(function (data) {
-          $scope.movie = data;
-        })
-        .error(function (response, status) {
+      movieFactory.getMovie($scope.id)
+        .then(function (response) {
+          $scope.movie = response.data;
+        }, function (response, status) {
           $log.warn(response);
         });
     }
 
     function updateMovie() {
-      $http({
-        method: 'PUT',
-        url: '/api/movies/' + $scope.id,
-        data: $scope.movie
-      }).success(function (data) {
-        $location.path('/');
-      })
-      .error(function (response, status) {
-        $log.warn(response);
-      });
+      movieFactory.updateMovie($scope.id, $scope.movie)
+        .then(function (response) {
+          $location.path('/');
+        }, function (response, status) {
+          $log.warn(response);
+        })
     }
 
   };

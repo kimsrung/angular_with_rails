@@ -5,23 +5,19 @@
     .module('myApp')
     .controller('NewController', NewController);
 
-  NewController.$inject = ['$scope', '$http', '$log', '$location'];
+  NewController.$inject = ['$scope', '$http', '$log', '$location', 'movieFactory'];
 
-  function NewController($scope, $http, $log, $location) {
+  function NewController($scope, $http, $log, $location, movieFactory) {
 
     $scope.createNewMovie = createNewMovie;
 
     function createNewMovie() {
-      $http({
-        method: 'POST',
-        url: '/api/movies',
-        data: $scope.movie
-      }).success(function (data) {
-        $location.path('/');
-      })
-      .error(function (response, status) {
-        $log.warn(response);
-      });
+      movieFactory.createMovie($scope.movie)
+        .then(function (response) {
+          $location.path('/');
+        }, function (response, status) {
+          $log.warn(response);
+        });
     }
   };
 

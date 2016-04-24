@@ -4,33 +4,32 @@
     .module('myApp')
     .controller('IndexController', IndexController);
 
-  IndexController.$inject = ['$scope', '$http', '$log', '$filter'];
+  IndexController.$inject = ['$scope', '$http', '$log', '$filter', 'movieFactory'];
 
-  function IndexController($scope, $http, $log, $filter) {
+  function IndexController($scope, $http, $log, $filter, movieFactory) {
     $scope.deleteMovie = deleteMovie;
 
     init();
 
+    function successCallback(data) {
+      $scope.movies = data;
+    }
+
+    function errorCallback(response) {
+      $log.warn(response);
+    }
+
     function init() {
-      $http.get('/api/movies')
-        .success(function (data) {
-          $scope.movies = data;
-        })
-        .error(function (response, status) {
-          $log.warn(response);
-        });
+      movieFactory.all(successCallback, errorCallback);
     }
 
     function deleteMovie(id, index) {
-      $http({
-        method: 'DELETE',
-        url: '/api/movies/' + id
-      }).success(function (data) {
-        $scope.movies.splice(index, 1)
-      })
-      .error(function (response, status) {
-        $log.warn(response);
-      });
+      movieFactory.deleteMovie(id)
+        .then(function (response) {
+          $scope.movies.splice(index, 1)
+        }, function (response, status) {
+          $log.warn(response);
+        });
     }
   };
 
