@@ -2,7 +2,7 @@
 
 ##Overview
 
-A movie application is a simple rails project that integration with angularJs.
+A movie application is a simple rails project that integration with angularJs. This project has already configed with html5mode in order to remove '#' from url.
 
 ##Technologies
 
